@@ -1,0 +1,6 @@
+pws = File.readlines("cain-and-abel.txt")
+pws << File.readlines("john_the_ripper_list.txt")
+pws << File.readlines("myspace_pws.txt")
+pws << File.readlines("phpbb.txt")
+pws << File.readlines("rockyou.txt")
+File.write('all_passwords.txt', pws.uniq!.join)
