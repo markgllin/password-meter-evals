@@ -17,9 +17,20 @@ indicator = {
 
 tester = Zxcvbn::Tester.new
 
-pws = File.readlines('all_passwords.txt')
+pws = File.readlines(ARGV[0])
 
-pws.each do |pw|
-  result = tester.test(pw.strip)
-  puts "#{pw.strip}, #{result.score}, #{indicator[result.score]}" 
+File.open('dropbox_results.csv', 'a') do |line|
+  line.puts "Password, Score, Strength, Entropy, Cracktime(secs), Cracktime(string), Calculation Time"
+
+  pws.each do |pw|
+    begin
+      result = tester.test(pw)
+      line.puts "#{pw.strip}, #{result.score}, #{indicator[result.score]}, #{result.entropy}, #{result.crack_time}, #{result.crack_time_display}, #{result.calc_time} "
+    rescue
+      File.open('dropbox_invalid.txt', 'a') do |invalid|
+        invalid.puts "pw"
+      end
+    end 
+  end
 end
+

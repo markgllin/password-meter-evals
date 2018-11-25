@@ -135,7 +135,7 @@ function CheckPasswordStrength(passwd)
 
 var fs = require('fs'),
   path = require('path'),
-  filePath = path.join(__dirname, 'all_passwords.txt');
+  filePath = path.join(__dirname, ARGV[0]);
 
 fs.readFile(filePath, {
   encoding: 'utf-8'
