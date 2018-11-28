@@ -28,7 +28,7 @@ File.open('dropbox_results.csv', 'a') do |line|
       line.puts "#{pw.strip}, #{result.score}, #{indicator[result.score]}, #{result.entropy}, #{result.crack_time}, #{result.crack_time_display}, #{result.calc_time} "
     rescue
       File.open('dropbox_invalid.txt', 'a') do |invalid|
-        invalid.puts "pw"
+        invalid.puts "#{pw}"
       end
     end 
   end
